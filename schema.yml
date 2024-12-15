@@ -1,0 +1,131 @@
+openapi: 3.0.3
+info:
+  title: API Project
+  version: 1.0.0
+  description: A sample project for learn DRF
+paths:
+  /api/v1/womenlist/:
+    get:
+      operationId: api_v1_womenlist_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Women'
+          description: ''
+    post:
+      operationId: api_v1_womenlist_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Women'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Women'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Women'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Women'
+          description: ''
+  /api/v1/womenlist/{id}/:
+    get:
+      operationId: api_v1_womenlist_list_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Women'
+          description: ''
+    post:
+      operationId: api_v1_womenlist_create_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Women'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Women'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Women'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Women'
+          description: ''
+components:
+  schemas:
+    Women:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 255
+        content:
+          type: string
+        category:
+          type: integer
+          nullable: true
+      required:
+      - title
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
