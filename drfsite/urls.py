@@ -14,15 +14,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from django import urls
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path, re_path
 
 from drf_spectacular.views import SpectacularAPIView
-from people.views import WomenAPIList 
+from people.views import WomenAPIList, WomenAPIUpdate, WomenAPIDetailView 
 
 urlpatterns = [
+    re_path(r'^silk', include('silk.urls', namespace='silk')),
     path('admin/', admin.site.urls),
     path('api/v1/womenlist/', WomenAPIList.as_view()),
-    path('api/v1/womenlist/<int:pk>/', WomenAPIList.as_view()),
+    path('api/v1/womenlist/<int:pk>/', WomenAPIUpdate.as_view()),
+    path('api/v1/womendetail/<int:pk>/', WomenAPIDetailView.as_view()),
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
 ]
+
+
+

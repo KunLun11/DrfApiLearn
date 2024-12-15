@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'people.apps.PeopleConfig',
     'rest_framework',
     'drf_spectacular',
-    
+    'silk',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +52,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+MIDDLEWARE_CLASSES = (
+    'silk.middleware.SilkyMiddleware',
+)
+
 
 ROOT_URLCONF = 'drfsite.urls'
 
@@ -126,9 +132,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer', # Если отключить эту настройку, то пользователь не сможет взаимодействовать с API. Он сможет только посмотреть.
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
+
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "API Project",

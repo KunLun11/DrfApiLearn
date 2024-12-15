@@ -1,0 +1,10 @@
+[tool.ruff]
+
+exclude = [
+    ".git",
+    ".gitignore",
+    ".env",
+    "myenv", 
+]
+
+line-length = 110
